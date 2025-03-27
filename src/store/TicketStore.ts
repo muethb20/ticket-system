@@ -3,10 +3,14 @@ import {ITicket} from "@/models/Ticket.model.ts";
 import {IUser} from "@/models/User.model.ts";
 
 interface ITicketStore {
+    isConnected: boolean,
     tickets: ITicket[],
     setTickets: (tickets: ITicket[]) => void,
     user: IUser | undefined,
-    setUser: (user: IUser) => void
+    admins: IUser[],
+    setIsConnected: (isConnected: boolean) => void,
+    setUser: (user: IUser | undefined) => void,
+    setAdmins: (admins: IUser[]) => void
 }
 
 export const useTicketStore = create<ITicketStore>(
@@ -14,5 +18,9 @@ export const useTicketStore = create<ITicketStore>(
         tickets: [],
         setTickets: (tickets: ITicket[]) => {set({tickets})},
         user: undefined,
-        setUser: (user) => {set({user})}
+        setUser: (user) => {set({user})},
+        admins: [],
+        setAdmins: (admins) => {set({admins})},
+        isConnected: false,
+        setIsConnected: (isConnected) => {set({isConnected})},
     }));

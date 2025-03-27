@@ -4,14 +4,13 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import {useTicketStore} from "@/state/TicketStore.ts";
 import {IUser} from "@/models/User.model.ts";
 import {useNavigate} from "react-router";
+import WSHandler from "@/websocket/WSHandler.ts";
+import {IMessage} from "@/models/IMessage.ts";
 
 export default function LoginPage() {
     const [showPassword, setShowPassword] = React.useState(false)
-
-    const { setUser } = useTicketStore();
 
     const [ email, setEmail ] = useState<string>("");
     const [ password, setPassword ] = useState<string>("");
@@ -23,10 +22,13 @@ export default function LoginPage() {
             password: password,
             firstname: "Test",
             lastname: "User",
-            role: "ADMIN"
+            role: ""
         }
 
-        setUser(user);
+        WSHandler.sendMessage({
+            type: "LOGIN",
+            payload: user
+        } as IMessage);
 
         if (user.role === "ADMIN") {
             navigate("/admin");

@@ -1,4 +1,4 @@
-import {useTicketStore} from "@/state/TicketStore.ts";
+import {useTicketStore} from "@/store/TicketStore.ts";
 import React from "react";
 import {Navigate, Outlet} from "react-router";
 

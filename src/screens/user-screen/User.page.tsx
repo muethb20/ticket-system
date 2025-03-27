@@ -16,7 +16,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
-import {useTicketStore} from "@/state/TicketStore.ts";
+import {useTicketStore} from "@/store/TicketStore.ts";
 
 type Ticket = {
     id: string
